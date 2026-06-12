@@ -21,6 +21,7 @@ jobs:
     plugin-validation-pr:
         runs-on: ubuntu-latest
         steps:
+          - uses: actions/checkout@v6
           - name: Run validation
             uses: ./.github/actions/plugin_pr_validate
             with:
