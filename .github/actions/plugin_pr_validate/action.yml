@@ -2,20 +2,17 @@ name: "Run validation and upload results"
 description: "Run validation script and upload the results to be commented on the PR"
 inputs:
     target-file:
-        description: "File to write outputs"
+        description: "File for recording validation results"
         required: false
         default: "validation-results.md"
-    repo:
-        description: "The repo"
-        required: true
     pr-number:
-        description: "The PR number"
+        description: "The PR number associated with the workflow run"
         required: true
     token:
         description: "GitHub Token"
         required: true
     user:
-        description: "The PR submitter to tag"
+        description: "The PR submitter, to tag in the validation results comment"
         required: true
 runs:
     using: "composite"

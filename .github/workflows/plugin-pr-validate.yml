@@ -25,7 +25,6 @@ jobs:
           - name: Run validation
             uses: ./.github/actions/plugin_pr_validate
             with:
-                repo: ${{ github.repository }}
                 pr-number: ${{ github.event.number }}
                 token: ${{ github.token }}
                 user: ${{ github.event.pull_request.user.login }}
