@@ -4,7 +4,7 @@ inputs:
     target-file:
         description: "File to write outputs"
         required: false
-        default: "validate-results.md"
+        default: "validation-results.md"
     repo:
         description: "The repo"
         required: true
