@@ -26,6 +26,9 @@ jobs:
                   PR_AUTHOR=$(cat pr-data/pr-author.txt)
                   VALIDATION_RESULTS=pr-data/validation-results.md
 
+                  # debugging
+                  cat "$VALIDATION_RESULTS"
+
                   # Append the PR author to the file.
                   # Using printf for compatibility; part of posix standard
                   # where echo is not.
