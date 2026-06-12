@@ -20,41 +20,11 @@ permissions:
 jobs:
     plugin-validation-pr:
         runs-on: ubuntu-latest
-        env:
-            PR_NUMBER: ${{ github.event.number }}
-            REPO: ${{ github.repository }}
-            GH_TOKEN: ${{ github.token }}
-            TARGET_FILE: "validation-results.md"
         steps:
-            - uses: actions/checkout@v6
-
-            - uses: actions/setup-python@v6
-              with:
-                  python-version: "3.14"
-                  cache: "pip"
-                  python-version-file: ".python-version"
-
-            - name: Install uv
-              uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
-
-            - name: Extract the new plugin data and lint it
-              shell: bash
-              run: |
-                  set -ex  # fail script on first command failure.
-
-                  scripts/validateall.sh "$TARGET_FILE"
-
-            - name: Record additional context for later comment
-              shell: bash
-              if: always()
-              run: |
-                  mkdir pr-data
-                  echo $PR_NUMBER > pr-data/pr-num.txt
-                  echo ${{ github.event.pull_request.user.login }} > pr-data/pr-author.txt
-                  cp "$TARGET_FILE" pr-data/
-
-            - name: Upload artifact
-              if: always()
-              uses: actions/upload-artifact@v7
-              with:
-                  path: pr-data
+          - name: Run validation
+            uses: ./.github/actions/plugin_pr_validate
+            with:
+                repo: ${{ github.repository }}
+                pr-number: ${{ github.event.number }}
+                token: ${{ github.token }}
+                user: ${{ github.event.pull_request.user.login }}
