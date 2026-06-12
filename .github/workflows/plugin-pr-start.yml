@@ -5,6 +5,8 @@ on:
         types: [opened]
         paths:
             - 'plugins.json'
+    issue_comment:
+        types: [created]
 
 permissions:
     contents: read
@@ -12,6 +14,8 @@ permissions:
 
 jobs:
     start-plugin-contrib-pr:
+        if: |
+            ${{ github.event_name == 'pull_request' || (github.event.issue.pull_request && github.event.comment.body == '/rubric') }}
         runs-on: ubuntu-latest
         env:
             PR_NUMBER: ${{ github.event.number }}
