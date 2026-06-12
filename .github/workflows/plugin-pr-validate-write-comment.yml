@@ -2,7 +2,7 @@ name: "Write PR comment with validation results"
 
 on:
     workflow_run:
-        workflows: ["Validate new plugin"]
+        workflows: ["Validate new plugin", "Rerun validation"]
         types: [completed]
 
 jobs:

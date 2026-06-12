@@ -1,0 +1,22 @@
+name: "Rerun validation"
+
+on:
+    issue_comment:
+        types: [created]
+
+permissions:
+    contents: read
+    pull-requests: write
+
+jobs:
+    plugin-validation-pr:
+        if: ${{ github.event.issue.pull_request && github.event.comment.body == '/run-validation' }}
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v6
+          - name: Run validation
+            uses: ./.github/actions/plugin_pr_validate
+            with:
+                pr-number: ${{ github.event.issue.number }}
+                token: ${{ github.token }}
+                user: ${{ github.event.issue.user.login }}
