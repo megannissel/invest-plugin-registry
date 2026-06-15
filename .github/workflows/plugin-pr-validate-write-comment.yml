@@ -2,7 +2,7 @@ name: "Write PR comment with validation results"
 
 on:
     workflow_run:
-        workflows: ["Validate new plugin"]
+        workflows: ["Validate new plugin", "Rerun validation"]
         types: [completed]
 
 jobs:
@@ -25,6 +25,9 @@ jobs:
                   PR_NUM=$(cat pr-data/pr-num.txt)
                   PR_AUTHOR=$(cat pr-data/pr-author.txt)
                   VALIDATION_RESULTS=pr-data/validation-results.md
+
+                  # debugging
+                  cat "$VALIDATION_RESULTS"
 
                   # Append the PR author to the file.
                   # Using printf for compatibility; part of posix standard

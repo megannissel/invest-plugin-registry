@@ -18,8 +18,7 @@ jobs:
             # being triggered by a bot, and bots cannot run workflows without a
             # maintainer granting permission every time.
             # Required permissions: actions:write, pull_requests:write
-            GH_TOKEN: ${{ secrets.PLUGIN_PR_WORKFLOW }}
-            GH_REPO: ${{ github.repository }}
+            GH_TOKEN: ${{ secrets.TRIGGER_WORKFLOW }}
         steps:
             - name: Close PR
               run: |
