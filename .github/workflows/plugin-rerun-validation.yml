@@ -16,6 +16,12 @@ jobs:
             PR_NUMBER: ${{ github.event.issue.number }}
             GH_TOKEN: ${{ github.token }}
         steps:
+            - name: debugging
+              env:
+                  GITHUB_CONTEXT: ${{ toJson(github) }}
+              run: |
+                  echo "$GITHUB_CONTEXT"
+
             - name: Close PR
               run: |
                   gh pr close \
