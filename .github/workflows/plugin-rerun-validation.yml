@@ -9,14 +9,21 @@ permissions:
     pull-requests: write
 
 jobs:
-    plugin-validation-pr:
+    plugin-rerun-validation:
         if: ${{ github.event.issue.pull_request && github.event.comment.body == '/run-validation' }}
         runs-on: ubuntu-latest
+        env:
+            PR_NUMBER: ${{ github.event.issue.number }}
+            GH_TOKEN: ${{ github.token }}
         steps:
-          - uses: actions/checkout@v6
-          - name: Run validation
-            uses: ./.github/actions/plugin_pr_validate
-            with:
-                pr-number: ${{ github.event.issue.number }}
-                token: ${{ github.token }}
-                user: ${{ github.event.issue.user.login }}
+            - name: Close PR
+              run: |
+                  gh pr close \
+                        "$PR_NUM" \
+                        --repo ${{ github.repository }}
+            
+            - name: Re-open PR
+              run: |
+                  gh pr reopen \
+                        "$PR_NUM" \
+                        --repo ${{ github.repository }}
