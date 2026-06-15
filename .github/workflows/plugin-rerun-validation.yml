@@ -19,8 +19,8 @@ jobs:
         steps:
             - name: Close PR
               run: |
-                  gh pr close "$PR_NUM"
+                  gh pr close "$PR_NUMBER"
             
             - name: Re-open PR
               run: |
-                  gh pr reopen "$PR_NUM"
+                  gh pr reopen "$PR_NUMBER"
