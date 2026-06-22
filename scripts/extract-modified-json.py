@@ -147,7 +147,7 @@ class TestExtractModifiedJSON(unittest.TestCase):
                 """\
                 [
                 {
-                    "foo": "bar",
+                    "foo": "bar1",
                 },
                 ]
                 """))
